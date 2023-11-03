@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  -
+    const results = [
+      { Name: "Instrument 1", product_type: "piano", price: 399.99 },
+      { Name: "Instrument 2", product_type: "guitar", price: 949.99 },
+      { Name: "Instrument 3", product_type: "harp", price: 699.99 }
+    ];
+  .container-fluid
+  .row
+    - for (let i = 0; i < results.length; i++)
+      .col-sm-2
+        h4= results[i].Name
+        h3(onclick=`buy(${i})`) BUY
+        p product_type : #{results[i].product_type} 
+        p Price: $#{results[i].price}
+
+  script.
+      function buy(index) {
+        alert("You purchased item " + index);
+      }
