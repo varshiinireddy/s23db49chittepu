@@ -13,11 +13,11 @@ mongoose.connect(connectionString);
 var resourceRouter = require("./routes/resource");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var instrumentsRouter = require('./routes/instrument');
+var instrumentRouter = require('./routes/instrument');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var resourceRouter = require('./routes/resource');
-
+var instrumentRouter = require('./controllers/instrument');
 var instrument = require('./models/instrument');
 
 var app = express();
@@ -35,9 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/resource', resourceRouter);
-app.use('/instrument', instrumentsRouter);
+app.use('/instrument', instrumentRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/instrument', instrumentRouter);
 //app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
