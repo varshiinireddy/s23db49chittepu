@@ -14,9 +14,18 @@ res.send(`{"error": ${err}}`);
 };
 
 // for a specific instrument.
-exports.instrument_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: instrument detail: ' + req.params.id);
-};
+exports.instrument_detail =async  function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await instrument.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+    
+
 // Handle instrument create on POST.
 exports.instrument_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: instrument create POST');
@@ -26,8 +35,24 @@ exports.instrument_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: instrument delete DELETE ' + req.params.id);
 };
 // Handle instrument update form on PUT.
-exports.instrument_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: instrument update PUT' + req.params.id);
+exports.instrument_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await instrument.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.name)
+    toUpdate.name = req.body.name;
+    if(req.body.product_type) toUpdate.product_type = req.body.product_type;
+    if(req.body.price) toUpdate.price = req.body.price;
+    let result = await toUpdate.save();
+    console.log("Sucess " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+    }
 };
 
 // VIEWS
@@ -64,4 +89,3 @@ exports.instrument_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-    

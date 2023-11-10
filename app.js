@@ -4,12 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
+var app = express();
 require('dotenv').config();
 const connectionString =
 process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+
+
 var resourceRouter = require("./routes/resource");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,9 +29,6 @@ var chooseRouter = require('./routes/choose');
 var resourceRouter = require('./routes/resource');
 var instrumentRouter = require('./controllers/instrument');
 var instrument = require('./models/instrument');
-
-var app = express();
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -43,7 +50,7 @@ app.use('/instrument', instrumentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+next(createError(404));
 });
 
 // error handler
