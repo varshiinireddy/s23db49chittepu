@@ -8,25 +8,37 @@ block content
   - let price = toShow.price
 
   div.row(class='mb-2')
-    div.mr-1 ID is
+    div.mr-1(style='color: red;') ID is
     div #{costumeid}
 
   - let actionid = "/resource/instruments/" + costumeid
 
   form(id='CostumeForm', action=actionid, method="PUT")
-    div.form-group
-      label.costumeAttr(for='name') Instrument type
-      input#name(type='text', name='name', value=name)
+    table(style='width:100%; border-collapse: collapse; margin-top: 20px;')
+      tr
+        th(style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;') Label
+        th(style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;') Input
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.costumeAttr(for='name') Instrument type
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#name(type='text', name='name', value=name)
 
-    div.form-group
-      label.costumeAttr(for='product_type') Instrument size
-      input#size(type='text', name='product_type', value=product_type)
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.costumeAttr(for='product_type') Instrument size
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#size(type='text', name='product_type', value=product_type)
 
-    div.form-group
-      label.costumeAttr(for='price') Instrument cost
-      input#cost(type='number', name='price', value=price)
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.costumeAttr(for='price') Instrument cost
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#cost(type='number', name='price', value=price)
 
-    input(type="submit")
+      tr
+        td(colspan='2', style='border: 1px solid #ddd; padding: 8px;')
+          input(type="submit")
 
   script.
     document.forms['CostumeForm'].addEventListener('submit', (event) => {

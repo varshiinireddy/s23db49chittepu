@@ -4,7 +4,7 @@ block content
   h1= title
 
   if (toShow == null)
-    h2 No instance to delete
+    h2(style='color: red;') No instance to delete
   else
     - let costumeid = toShow._id
     - let name = toShow.name
@@ -15,26 +15,26 @@ block content
     script.
       let actionid = "#{actionid}"
 
-    div
-      div.row
-        div(class='costumeAttr mr-3') Costume ID is:
-        div #{costumeid}
-      div.row
-        div(class='costumeAttr mr-3') name Type is:
-        div #{name}
-      div.row
-        div(class='costumeAttr mr-3') product_type Size is:
-        div #{price}
-      div.row
-        div(class='costumeAttr mr-3') price Cost is:
-        div #{product_type}
-
-      button(class="btn btn-danger m-2", onclick="deleteOnid()") Delete
-      button(class="btn btn-secondary m-2", onclick="cancel()") Cancel
+    div(style='margin-top: 20px;')
+      table(style='width: 100%; border-collapse: collapse; border: 1px solid #ddd;')
+        tr(style='background-color: #f2f2f2;')
+          td(style='padding: 8px; border: 1px solid #ddd;') Costume ID is:
+          td(style='padding: 8px; border: 1px solid #ddd;') #{costumeid}
+        tr(style='background-color: #ffffff;')
+          td(style='padding: 8px; border: 1px solid #ddd;') Name is:
+          td(style='padding: 8px; border: 1px solid #ddd;') #{name}
+        tr(style='background-color: #f2f2f2;')
+          td(style='padding: 8px; border: 1px solid #ddd;') Product Type is:
+          td(style='padding: 8px; border: 1px solid #ddd;') #{product_type}
+        tr(style='background-color: #ffffff;')
+          td(style='padding: 8px; border: 1px solid #ddd;') Price is:
+          td(style='padding: 8px; border: 1px solid #ddd;') #{price}
+      button(style='margin-top: 10px; background-color: #dc3545; color: white; border: none; padding: 10px 20px; cursor: pointer;', onclick="deleteOnid()") Delete
+      button(style='margin-top: 10px; background-color: #6c757d; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-left: 10px;', onclick="cancel()") Cancel
 
     script.
       function cancel() {
-        // Go back to the home page for the costume collection
+        // Go back to the home page for the instrument collection
         window.location.href='/instruments'
       }
 

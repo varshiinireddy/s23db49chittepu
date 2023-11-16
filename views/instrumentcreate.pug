@@ -3,16 +3,31 @@ extends layout
 block content
   h1= title
   form(id='InstrumentForm', action="/resource/instruments", method="POST")
-    div.form-group
-      label.instrumentAttr(for='name') instrument type
-      input#name(type='text', name='name')
-    div.form-group
-      label.instrumentAttr(for='product_type') instrument product_type
-      input#product_type(type='text', name='product_type')
-    div.form-group
-      label.instrumentAttr(for='price') instrument price
-      input#price(type='number', name='price')
-    input(type="submit")
+    table(style='width:100%; border-collapse: collapse; margin-top: 20px;')
+      tr
+        th(style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;') Label
+        th(style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;') Input
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.instrumentAttr(for='name') Instrument type
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#name(type='text', name='name')
+
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.instrumentAttr(for='product_type') Instrument product type
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#product_type(type='text', name='product_type')
+
+      tr
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          label.instrumentAttr(for='price') Instrument price
+        td(style='border: 1px solid #ddd; padding: 8px;')
+          input#price(type='number', name='price')
+
+      tr
+        td(colspan='2', style='border: 1px solid #ddd; padding: 8px;')
+          input(type="submit")
 
   script.
     document.forms['InstrumentForm'].addEventListener('submit', (event) => {
@@ -34,5 +49,3 @@ block content
         alert("Save failed " + error);
       });
     });
-
-
