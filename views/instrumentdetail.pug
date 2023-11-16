@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+
+  - let costumeid = toShow._id
+  - let name = toShow.name
+  - let product_type = toShow.product_type
+  - let price = toShow.price
+
+  div
+    div.row
+      div(class='instrumentAttr mr-3') Instrument ID is:
+      div #{costumeid}
+
+    div.row
+      div(class='instrumentAttr mr-3') Instrument name is:
+      div #{name}
+
+    div.row
+      div(class='instrumentAttr mr-3') Instrument price is:
+      div #{price}
+
+    div.row
+      div(class='instrumentAttr mr-3') Instrument type is:
+      div #{product_type}

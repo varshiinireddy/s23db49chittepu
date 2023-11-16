@@ -18,12 +18,3 @@ router.get('/instruments/:id', instrument_controller.instrument_detail);
 // GET request for list of all instrument items.
 router.get('/instruments', instrument_controller.instrument_list);
 module.exports = router;
-// API for our resources
-exports.api = function(req, res) {
-res.write('[');
-res.write('{"resource":"instruments", ');
-res.write(' "verbs":["GET","PUT", "DELETE"] ');
-res.write('}');
-res.write(']')
-res.send();
-};

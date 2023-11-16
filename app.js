@@ -6,8 +6,7 @@ var logger = require('morgan');
 
 var app = express();
 require('dotenv').config();
-const connectionString =
-process.env.MONGO_CON
+const connectionString =process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString);
 
@@ -20,14 +19,15 @@ console.log("Connection to DB succeeded")});
 
 
 
-var resourceRouter = require("./routes/resource");
+var resourceRouter = require('./routes/resource');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var instrumentRouter = require('./routes/instrument');
+var instrumentsRouter = require('./routes/instrumentss');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var resourceRouter = require('./routes/resource');
-var instrumentRouter = require('./controllers/instrument');
+//var instrumentRouter = require('./controllers/instrument');
 var instrument = require('./models/instrument');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -45,7 +45,8 @@ app.use('/resource', resourceRouter);
 app.use('/instrument', instrumentRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
-app.use('/instrument', instrumentRouter);
+app.use('/instrumentss', instrumentsRouter);
+
 //app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
@@ -67,7 +68,7 @@ app.use(function(err, req, res, next) {
 // We can seed the collection if needed onserver start
 async function recreateDB(){
   // Delete everything
-    await instrument.deleteMany()
+    await instrument.deleteMany();
   let instance1 = new instrument({ name: "Instrument 1", product_type: "piano", price: 399.99 });
   instance1.save().then(doc=>{
   console.log("First object saved")}
@@ -84,7 +85,7 @@ async function recreateDB(){
 
   let instance3 = new instrument({name: "Instrument 3", product_type: "harp", price: 699.99});
   instance3.save().then(doc=>{
-  console.log("Thired object saved")}
+  console.log("Third object saved")}
   ).catch(err=>{
   console.error(err)
   });
