@@ -70,6 +70,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -81,6 +82,14 @@ app.use('/choose', chooseRouter);
 app.use('/instrumentss', instrumentsRouter);
 
 //app.use('/resource', resourceRouter);
+
+// passport config
+// Use the existing connection
+// The Account model
+var Account =require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
