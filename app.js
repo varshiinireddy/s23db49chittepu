@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+const session = require("express-session");
 
 passport.use(new LocalStrategy(
   function (username, password, done) {

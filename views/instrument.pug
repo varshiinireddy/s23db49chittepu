@@ -1,16 +1,27 @@
 extends layout
+
 block content
   h1= title
   - let instruments = results;
   div(class="container-fluid")
     div(class="row m-1")
       each instrument in instruments
-        - let destination = `dispatch(\"/instrument/update?id=${instrument._id}\")`
-        div(class="row-sm-2", class="m-1") Instrument: #{instrument.name}(#{instrument.product_type}) Price is: #{instrument.price}
-          button.btn( class="btn-primary ml-1", onclick= destination) Update
+        - let destination = `dispatch("/instrumentss/update?id=${instrument._id}")`
+        - let create = `dispatch("/instrumentss/create")`
+        - let detail = `dispatch("/instrumentss/detail?id=${instrument._id}")`
+        - let deleted1 = `dispatch("/instrumentss/delete?id=${instrument._id}")`
+        h4= instrument.productname
+        h3(onclick=`buy(${instrument._id})`) BUY
+        p manufacturer : #{instrument.manufacturer}
+        p price: $#{instrument.price}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+        button.btn( class="btn-primary ml-1", onclick= create) Create
+        button.btn( class="btn-primary ml-1", onclick= detail) Detail
+        button.btn( class="btn-primary ml-1", onclick= deleted1) Delete
+
     script.
       function dispatch(path){
-        window.location.href=path
+        window.location.href = path;
       }
 
 
@@ -42,3 +53,7 @@ block content
 //-     function dispatch(path) {
 //-       window.location.href = path;
 //-     }
+
+
+
+

@@ -10,12 +10,24 @@ router.get('/', api_controller.api);
 // POST request for creating a Costume.
 //router.post('/monitors', monitor_controller.monitor_create_post);
 // DELETE request to delete Costume.
-router.get('/detail', instruments_controller.instrument_view_one_Page);
+router.get('/detail', secured,instruments_controller.instrument_view_one_Page);
+
+// A little function to check if we have an authorized user and continue on
+//or
+// redirect to login.
+const secured = (req, res, next) => {
+if (req.user){
+return next();
+}
+res.redirect("/login");
+}
+
+
 //* GET create monitor page *
-router.get('/create', instruments_controller.instrument_create_Page)
+router.get('/create',secured, instruments_controller.instrument_create_Page)
 //* GET create update page */
-router.get('/update', instruments_controller.instrument_update_Page);
+router.get('/update',secured, instruments_controller.instrument_update_Page);
 /* GET delete costume page */
-router.get('/delete', instruments_controller.instrument_delete_Page);
+router.get('/delete',secured, instruments_controller.instrument_delete_Page);
  
 module.exports = router;
